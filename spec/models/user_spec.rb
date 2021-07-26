@@ -5,6 +5,54 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
+    context '新規登録がうまくいくとき' do
+      it 'nicknameが存在すれば登録できる' do
+        @user.nickname = "aaa"
+        expect(@user).to be_valid
+      end
+
+      it 'メールアドレスが存在すれば登録出来る' do
+        @user.email = "aaa@aaa"
+        expect(@user).to be_valid
+      end
+
+      it 'passwordが6文字以上、英字と数字の両方を含めてあれば登録できる' do
+        @user.password = "000aaa"
+        expect(@user).to be_valid
+      end
+      
+      it 'パスワード(確認)で同じパスワードが入力されれば登録出来る'do
+        @user.password_confirmation = "000aaa"
+        expect(@user).to be_valid
+      end
+
+      it '名前(last_name)が全角で入力されていれば登録できる'do
+      @user.last_name = "山田"
+      expect(@user).to be_valid
+      end
+
+      it '名前(first_name)が全角で入力されていれば登録できる'do
+      @user.last_name = "太郎"
+      expect(@user).to be_valid
+      end
+
+      it '名前(last_name_kana)が全角カナで入力されていれば登録できる'do
+      @user.last_name = "ヤマダ"
+      expect(@user).to be_valid
+      end
+      
+      it '名前(first_name_kana)が全角カナで入力されていれば登録できる'do
+      @user.first_name = "タロウ"
+      expect(@user).to be_valid
+      end
+
+      it '生年月日が入力されていれば登録できる'do
+      @user.birth_date = "1931-01-01"
+      expect(@user).to be_valid
+      end
+    end
+
+  context '新規登録がうまくいかないとき' do
     it 'nicknameが空だと登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -87,28 +135,35 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
 
-    it 'family_nameが全角文字であれば登録できる' do
+    it 'last_nameが全角文字でなければ登録できない' do
       @user.last_name = 'aaa'
       @user.valid?
       expect(@user.errors.full_messages).to include('Last name is invalid')
     end
 
-    it 'first_nameが全角文字であれば登録できる' do
+    it 'first_nameが全角文字でなければ登録できない' do
       @user.first_name = 'aaa'
       @user.valid?
       expect(@user.errors.full_messages).to include('First name is invalid')
     end
 
-    it 'family_name_kanaが全角カナであれば登録できる' do
-      @user.last_name_kana = 'aaa'
+    it 'last_name_kanaが全角カナでなければ登録できない' do
+      @user.last_name_kana = 'ｵｵｵ'
       @user.valid?
       expect(@user.errors.full_messages).to include('Last name kana is invalid')
     end
 
-    it 'first_name_kanaが全角カナであれば登録できる' do
-      @user.first_name_kana = 'aaa'
+    it 'first_name_kanaが全角カナでなければ登録できない' do
+      @user.first_name_kana = 'ｵｵｵ'
       @user.valid?
       expect(@user.errors.full_messages).to include('First name kana is invalid')
     end
+
+    it 'emailで「＠」がない場合、登録できない' do
+      @user.email = 'aaacom'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+   end
   end
 end
