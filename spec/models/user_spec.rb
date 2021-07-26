@@ -159,6 +159,18 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('First name kana is invalid')
     end
 
+    it 'last_name_kanaがカタカナ以外の全角文字だと登録できないこと' do
+      @user.last_name_kana = 'おおお'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Last name kana is invalid')
+    end
+
+    it 'first_name_kanaがカタカナ以外の全角文字だと登録できないこと' do
+      @user.first_name_kana = 'おおお'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name kana is invalid')
+    end
+
     it 'emailで「＠」がない場合、登録できない' do
       @user.email = 'aaacom'
       @user.valid?
