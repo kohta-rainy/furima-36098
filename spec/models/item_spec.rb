@@ -34,9 +34,9 @@ RSpec.describe Item, type: :model do
       end
 
       it'sprefecture_idが0だと登録できない'do
-        @item.prefecture_id = 0
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
 
       it'scheduled_delivery_idが1だと登録できない'do
@@ -72,31 +72,31 @@ RSpec.describe Item, type: :model do
       it 'category_idが空では登録できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category is not a number")
       end
 
       it 'sales_status_idが空では登録できない' do
         @item.sales_status_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sales status can't be blank")
+        expect(@item.errors.full_messages).to include("Sales status is not a number")
       end
 
       it 'shipping_fee_status_idが空では登録できない' do
         @item.shipping_fee_status_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping fee status is not a number")
       end
 
       it 'prefecture_idが空では登録できない' do
         @item.prefecture_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture is not a number")
       end
 
       it 'scheduled_delivery_idが空では登録できない' do
         @item.scheduled_delivery_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
+        expect(@item.errors.full_messages).to include("Scheduled delivery is not a number")
       end
 
       it 'priceが空では登録できない' do
@@ -122,6 +122,19 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 999999")
       end
+
+      it 'priceが半角英数混合では登録できない' do
+        @item.price = '100aaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      
+      it 'priceが半角英語だけでは登録できない' do
+        @item.price = 'aaaaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
     end
   end
 end
