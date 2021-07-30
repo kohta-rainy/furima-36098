@@ -20,7 +20,7 @@ validates :shipping_fee_status_id, numericality: { other_than: 1 }
 validates :prefecture_id, numericality: { other_than: 0 } 
 validates :scheduled_delivery_id , numericality: { other_than: 1 } 
 validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 999999}
-validates :price,format: { with: /\A[0-9]+\z/, message: "金額は半角でご入力してください"}
+validates :price,format: { with: /\A[0-9]+\z/}
 validates :image            
  end
 end
