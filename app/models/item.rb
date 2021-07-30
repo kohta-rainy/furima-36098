@@ -14,7 +14,7 @@ with_options presence: true do
 validates :name
 validates :info
 validates :image 
-validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 999999}
+validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 validates :price,format: { with: /\A[0-9]+\z/}
 end
 
