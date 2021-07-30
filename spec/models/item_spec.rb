@@ -33,7 +33,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Shipping fee status must be other than 1")
       end
 
-      it'sprefecture_idが0だと登録できない'do
+      it'prefecture_idが1だと登録できない'do
         @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
