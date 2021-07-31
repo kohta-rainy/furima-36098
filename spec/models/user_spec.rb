@@ -6,10 +6,12 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
+
       it 'nicknameが存在すれば登録できる' do
         @user.nickname = "aaa"
         expect(@user).to be_valid
       end
+    end
 
       it 'メールアドレスが存在すれば登録出来る' do
         @user.email = "aaa@aaa"
