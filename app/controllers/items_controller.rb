@@ -29,7 +29,8 @@ class ItemsController < ApplicationController
 
   def update 
     if @item.update(item_params)
-      redirect_to item_path, notice: ''
+       current_user.id == @item.user_id 
+       redirect_to item_path, notice: ''
     else
       render 'edit'
     end
