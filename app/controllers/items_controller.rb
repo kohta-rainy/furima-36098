@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit  
-    redirect_to root_path unless
   end
 
   def update 
@@ -46,6 +45,7 @@ class ItemsController < ApplicationController
   end
 
   def person
-    current_user.id == @item.user_id 
+    if  current_user.id != @item.user_id
+      redirect_to root_path unless
   end
 end
