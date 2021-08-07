@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order do
     postal_code{'111-1111'}
-    prefectures_id{5}
+    prefecture_id{5}
     municipalities{'京都市'}
     address{10}
     building_name{'ライオンズ'}

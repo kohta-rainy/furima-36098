@@ -6,7 +6,9 @@ class OrdersController < ApplicationController
     @order = Order.new
     if current_user == @item.user
        redirect_to root_path
-      end
+    else @item.purchase_record.present?
+      redirect_to root_path
+    end
   end
 
   def create

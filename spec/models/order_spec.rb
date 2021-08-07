@@ -6,7 +6,7 @@ RSpec.describe Order, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @order = FactoryBot.build(:order,user_id: user.id, item_id:item.id)
-      sleep 0.1 
+      sleep 0.1
     end
 
     context '内容に問題ない場合' do
@@ -28,9 +28,9 @@ RSpec.describe Order, type: :model do
       end
 
       it '都道府県を選択していないと購入できないこと' do
-        @order.prefectures_id = ''
+        @order.prefecture_id = ''
         @order.valid?
-        expect(@order.errors.full_messages).to include("Prefectures can't be blank")
+        expect(@order.errors.full_messages).to include("Prefecture can't be blank")
       end
 
       it '市町村が空だと購入できないこと' do
