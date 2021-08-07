@@ -34,7 +34,7 @@
 ## destinationsテーブル（発送先）
 | Column             | Type     | Options     |
 | ------------------ | -------- | ----------- |
-| postal_code_id     | string   | null: false |
+| postal_code        | string   | null: false |
 | prefectures_id     | integer  | null: false |
 | municipalities     | string   | null: false |
 | address            | string   | null: false |
@@ -45,9 +45,10 @@
 - belongs_to : purchase_record
 
 ## purchase_recordsテーブル(商品、購入者)
-| Column          | Type     | Options                       |
-| ----------------| -------- | ----------------------------- |
+| Column          | Type    options                        
+------------------| ------| ------ |
 | item            |references| null: false, foreign_key:true |
+
 | user            |references| null: false, foreign_key:true |
 ### Association
 - belongs_to : user
