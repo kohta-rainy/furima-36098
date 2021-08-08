@@ -81,6 +81,20 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Token can't be blank")
       end
 
+      it '電話番号が９桁以下では購入できない' do
+        @order.telephone_number = '09012345'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Telephone number is invalid")
+      end
+
+      it '電話番号が１２桁以上では購入できない' do
+        @order.telephone_number = '090123456789'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Telephone number is invalid")
+      end
+
+      
+
     end   
   end  
 end
