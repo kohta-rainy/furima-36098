@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:update, :edit, :show, :destroy]
   before_action :person, only: [:edit, :update, :destroy]
 
+
   def index
     @items = Item.all.order("created_at DESC")
   end
@@ -50,7 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def person
-    redirect_to root_path if current_user.id || @item.user_id && @item.purchase_record.present?
-      end
+    if current_user.id != @item.user_id || @item.purchase_record.present?
+      redirect_to root_path
+    end
   end
 end
