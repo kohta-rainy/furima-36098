@@ -93,7 +93,11 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Telephone number is invalid")
       end
 
-      
+      it '都道府県を選択で--を撰択していると登録できない' do
+        @order.prefecture_id = '1'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Prefecture must be other than 1")
+      end      
 
     end   
   end  
