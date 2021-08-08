@@ -7,7 +7,7 @@ class Order
     validates :prefecture_id
     validates :municipalities
     validates :address
-    validates :telephone_number, format: { with: /\A[0-9]+\z/}
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/}
     validates :item_id
     validates :user_id
     validates :token

@@ -63,6 +63,24 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Postal code is invalid")
       end
 
+      it 'user_idが空だと購入できない' do
+        @order.user_id = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと購入できない' do
+        @order.item_id = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'tokenが空だと購入できない' do
+        @order.token = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Token can't be blank")
+      end
+
     end   
   end  
 end
